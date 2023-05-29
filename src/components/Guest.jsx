@@ -12,6 +12,7 @@ export default function Guest() {
                     />
                 </div>
                 <Outlet/>
+                
             </div>
         </>
     )
