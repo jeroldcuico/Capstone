@@ -37,6 +37,6 @@ class RolePolicy
      */
     public function delete(User $user, Role $role): bool
     {
-        return $user->hasAnyRole(['super-admin',]);
+        return $user->hasAnyRole(['super-admin', 'admin']);
     }
 }
