@@ -29,7 +29,7 @@ class RolePolicy
      */
     public function update(User $user, Role $role): bool
     {
-        return $user->hasAnyRole(['super-admin', 'admin']);
+        return $user->hasAnyRole(['super-admin', 'admin',]);
     }
 
     /**
