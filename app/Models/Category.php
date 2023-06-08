@@ -1,32 +1,25 @@
 <?php
 
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Job extends Model
+class Category extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'name',
         'slug',
-        'details',
-        'price',
-        'job_code',
-        'description',
-        'image',
+        'category_code',
     ];
-
     /**
-     * The roles that belong to the Job
+     * The roles that belong to the Category
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function categories(): BelongsToMany
-    {
-        return $this->belongsToMany(Category::class);
+    public function jobs(): BelongsToMany{
+        return $this->belongsToMany(Job::class);
     }
 }
