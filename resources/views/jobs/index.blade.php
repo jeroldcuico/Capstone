@@ -2,6 +2,7 @@
     <div class="pt-[4.5rem]">
         <section class="bg-white">
             <div class="flex">
+                <!---Left-->
                 <div class="border-r w-1/5">
                     <div>
                         <div class="text-white text-center bg-cyan-700 py-4">
@@ -16,6 +17,7 @@
                         </div>
                     </div>
                 </div>
+                <!---Right-->
                 <div class="border-l w-4/5">
                     <div class="container flex flex-wrap mx-auto">
                         @if (count($jobs) === 0)
