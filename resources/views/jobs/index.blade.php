@@ -23,7 +23,7 @@
             <div class="border-r w-1/5">
                 <div>
                     <div class="text-white text-center bg-cyan-700 py-4">
-                        <p>Shop By Category</p>
+                        <p>Jobs By Category</p>
                     </div>
                     <div class="flex flex-col divide-y">
                         @foreach ($categories as $category)
