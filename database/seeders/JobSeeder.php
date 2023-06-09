@@ -40,6 +40,9 @@ class JobSeeder extends Seeder
                     'description' => "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
                 ])->categories()->attach($category);
             }
+        }
+
+        foreach ($imagePaths as $imagePath) {
 
             for ($i = 0; $i < 10; $i++) {
                 //BPO Jobs

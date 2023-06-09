@@ -15,8 +15,8 @@ class WelcomeController extends Controller
     {
         //$joblist = Job::all();
         $categoryList = Category::take(4)->inRandomOrder()->get(['name', 'slug']);
-        $featuredjobList = Job::where('image', '!=', 'jobs/default.png')->take(4)->inRandomOrder()->get(['name', 'slug', 'price', 'description',  'image']);
-        return view('welcome', compact('featuredjobList', 'categoryList'));
+        
+        return view('welcome', compact ('categoryList'));
     }
 
     /**

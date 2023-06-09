@@ -3,10 +3,11 @@
 namespace App\View\Components;
 
 use Closure;
-use Illuminate\Contracts\View\View;
+use App\Models\Job;
 use Illuminate\View\Component;
+use Illuminate\Contracts\View\View;
 
-class Header extends Component
+class FeaturedJobs extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +22,8 @@ class Header extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.header');
+        $featuredjobList = Job::where('image', '!=', 'jobs/default.png')->take(6)->inRandomOrder()->get(['name', 'slug', 'price', 'description',  'image']);
+        return view('components.featuredjobs', compact ('featuredjobList'));
     }
+
 }
