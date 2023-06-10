@@ -14,8 +14,8 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         Category::insert([
-            ['name' => 'Information and Technology', 'slug' => 'info_tech', 'category_code' => 'info-tech'],
-            ['name' => 'BPO Industry', 'slug' => 'bpo_industry', 'category_code' => 'bpo_industry'],
+            ['name' => 'Information and Technology', 'slug' => 'info_tech', 'category_code' => 'info-tech' , 'created_at' => now() , 'updated_at' => now()],
+            ['name' => 'BPO Industry', 'slug' => 'bpo_industry', 'category_code' => 'bpo_industry' , 'created_at' => now() , 'updated_at' => now()],
         ]);
     }
 }
