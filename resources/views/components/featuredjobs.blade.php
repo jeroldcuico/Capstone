@@ -10,7 +10,7 @@
             <div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
                 <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
                     <a href="#" class="flex flex-wrap no-underline hover:no-underline">
-                        <img src="{{ asset($job->image) }}" alt="{{ $job->name }}"
+                        <img src="{{ asset('storage/' . $job->image) }}" alt="{{ $job->name }}"
                             class="h-full w-full object-fill lg:h-full lg:w-full">
                         <div class="w-full font-bold text-xl text-gray-800 px-6">
                             {{ $job->name }}

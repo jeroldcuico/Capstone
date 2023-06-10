@@ -40,7 +40,7 @@ class CategoryResource extends Resource
                         $second_word = array_pop($categoryParts);
                         $set(
                             'category_code',
-                            Str::substr($first_word, 0, 4) . Str::substr($second_word, 0, 4)
+                            Str::substr($first_word, 0, 3) . Str::substr($second_word, 0, 3)
                         );;
                     })
                     ->autofocus()
