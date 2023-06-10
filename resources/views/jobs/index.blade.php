@@ -9,23 +9,24 @@
                             <p>Category Jobs</p>
                         </div>
                         <div class="flex flex-col divide-y">
-                            <ul>
-                                @foreach ($categories as $category)
-                                    <li>{{ $category->name }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
+                            @foreach ($categories as $category)
+                                <a class="text-left px-4 py-4  transition hover:text-white hover:bg-cyan-950 sm:px-6 lg-px-8"
+                                    href={{ route('jobs.index', $category->slug) }}>{{ $category->name }}</a>
+                                </li>
+                            @endforeach
+                        </div> 
                     </div>
                 </div>
-                <!---Right-->
+                <!---Right--> 
                 <div class="border-l w-4/5">
                     <div class="container flex flex-wrap mx-auto">
                         @if (count($jobs) === 0)
                             <h1>No Jobs List Found</h1>
                         @else
                             @foreach ($jobs as $job)
-                                <a href={{ route('jobs.index', $job->name) }} class="p-2">
-                                    <img src="{{ asset($job->image) }}" alt="{{ $job->name }}" class="object-cover" />
+                                <a href={{ route('jobs.index', $job->slug) }} class="p-2">
+                                    <img src="{{ asset('storage/' . $job->image) }}" alt="{{ $job->name }}"
+                                        class="object-cover w-[22rem] h-[15rem]" />
                                     <div class="flex justify-around bg-cyan-700 py-2">
                                         <span class="text-black">{{ $job->name }}</span>
                                         <span class="text-white">Php{{ $job->price }}</span>
@@ -34,9 +35,9 @@
                             @endforeach
                         @endif
                     </div>
-                </div>
+                </div>                
             </div>
         </section>
     </div>
-  
+
 </x-guest-layout>

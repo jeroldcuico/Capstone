@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\CategoryResource\RelationManagers\CategoriesRelationManager;
 use Closure;
 use App\Models\Job;
 use Filament\Forms;
@@ -14,6 +15,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\JobResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\JobResource\RelationManagers;
+use League\CommonMark\Normalizer\SlugNormalizer;
 
 class JobResource extends Resource
 {
@@ -31,17 +33,29 @@ class JobResource extends Resource
                     ->reactive()
                     ->afterStateUpdated(function (Closure $set, $state) {
                         $set('slug', Str::slug($state));  //Autopopulates in slug textbox
+
+                        //! Job Code manipulation
+
+                        $jobname = explode(' ', trim($state));
+                        $firstword = array_shift($jobname);
+                        $secondword = array_pop($jobname);
+                        $set('job_code', Str::substr($firstword, 0, 3) . Str::substr($secondword, 0, 3));
                     })
                     ->autofocus()
-                    ->unique()
                     ->required(),
                 Forms\Components\TextInput::make('slug')
                     ->disabled()
                     ->required(),
-                Forms\Components\TextInput::make('job_code'),
-                Forms\Components\TextInput::make('price'),
-                Forms\Components\Textarea::make('details'),
-                Forms\Components\Textarea::make('description'),
+                Forms\Components\TextInput::make('job_code')
+                    ->required()
+                    ->dehydrateStateUsing(fn ($state) => Str::lower($state)),
+                Forms\Components\TextInput::make('price')
+                    ->required(),
+                Forms\Components\FileUpload::make('image'),
+                Forms\Components\MarkdownEditor::make('details'),
+                Forms\Components\MarkdownEditor::make('description'),
+                Forms\Components\CheckboxList::make('categories')
+                    ->relationship('categories', 'name'),
             ]);
     }
 
@@ -49,9 +63,11 @@ class JobResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\ImageColumn::make('image'),
                 Tables\Columns\TextColumn::make('name')->sortable(),
                 Tables\Columns\TextColumn::make('slug'),
-                Tables\Columns\TextColumn::make('price'),
+                Tables\Columns\TextColumn::make('price')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime('m-D-y')
                     ->sortable(),
@@ -62,6 +78,7 @@ class JobResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -71,7 +88,7 @@ class JobResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            CategoriesRelationManager::class,
         ];
     }
 
