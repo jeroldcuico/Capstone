@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedbiginteger('price');
             $table->string('job_code');
             $table->string('description');
-            $table->string('image')->default('assets/default.jpg');
+            $table->string('image')->default('default.jpg');
             $table->timestamps();
         });
     }
