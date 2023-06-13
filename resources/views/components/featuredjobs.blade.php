@@ -1,5 +1,5 @@
 <section class="bg-white border-b py-8">
-    <div class="container mx-auto flex flex-wrap pt-4 pb-12">
+    <div class="container sm:mx-auto flex flex-wrap pt-4 pb-12">
         <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
             FEATURED JOBS
         </h1>
@@ -10,7 +10,8 @@
             <nav class="py-4 px-6 text-sm font-medium">
                 <ul class="flex space-x-3">
                     <li class="flex">
-                        <a href="#" class="block px-3 py-2 rounded-md bg-sky-500 text-white bg-slate-100'">New Jobs</a>
+                        <a href="#" class="block px-3 py-2 rounded-md bg-sky-500 text-white bg-slate-100'">New
+                            Jobs</a>
                         <a href="#" class="block px-3 py-2 rounded-md text-black bg-slate-100'">Featured Jobs</a>
                     </li>
                 </ul>
@@ -19,8 +20,8 @@
                 @foreach ($featuredjobList as $job)
                     <li class="bg-purple-500 rounded">
                         <article class="flex items-start space-x-6 p-6">
-                            <img src="{{ asset( 'assets/' .  $job->image) }}" alt="{{ $job->name }}" width="20%"
-                             class="flex-none rounded-md bg-slate-100" />
+                            <img src="{{ asset($job->image) }}" alt="{{ $job->name }}" width="20%"
+                                class="flex-none rounded-md bg-slate-100" />
                             <div class="min-w-0 relative flex-auto">
                                 <h2 class="font-semibold text-slate-900 truncate pr-20">{{ $job->name }}</h2>
                                 <dl class="mt-2 flex flex-wrap text-sm leading-6 font-medium">
