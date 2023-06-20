@@ -66,8 +66,8 @@ class JobResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('image'),
-                Tables\Columns\TextColumn::make('name')->sortable(),
-                Tables\Columns\IconColumn::make('is_featured')->sortable()->searchable()->boolean(),
+                Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
+                Tables\Columns\IconColumn::make('is_featured')->sortable()->boolean(),
                 Tables\Columns\TextColumn::make('slug'),
                 Tables\Columns\TextColumn::make('price')
                     ->sortable(),

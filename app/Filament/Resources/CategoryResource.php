@@ -29,6 +29,7 @@ class CategoryResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\FileUpload::make('image'),
                 Forms\Components\TextInput::make('name')
                     ->reactive()
                     ->afterStateUpdated(function (Closure $set, $state) {
@@ -51,7 +52,7 @@ class CategoryResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('category_code')
                     ->dehydrateStateUsing(fn ($state) => Str::lower($state))
-                    ->helperText('Code will generated based from the first four characters')
+                    ->helperText('Code will generated based from the first three characters')
                     ->required(),
             ]);
     }
@@ -60,9 +61,9 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->sortable(),
+                Tables\Columns\ImageColumn::make('image'),
+                Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('slug'),
-                Tables\Columns\TextColumn::make('category_code'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime('m-D-y')
                     ->sortable(),

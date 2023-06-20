@@ -14,7 +14,7 @@ class WelcomeController extends Controller
     public function index()
     {
         //$joblist = Job::all();
-        $categoryList = Category::take(4)->inRandomOrder()->get(['name', 'slug']);
+        $categoryList = Category::take(4)->inRandomOrder()->get(['name', 'slug' , 'image']);
         
         return view('welcome', compact ('categoryList'));
     }

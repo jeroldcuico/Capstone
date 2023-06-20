@@ -2,16 +2,23 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\PageResource\Pages;
-use App\Filament\Resources\PageResource\RelationManagers;
-use App\Models\Page;
+use Closure;
 use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use App\Models\Page;
 use Filament\Tables;
+use Illuminate\Support\Str;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Toggle;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\RichEditor;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\PageResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\PageResource\RelationManagers;
 
 class PageResource extends Resource
 {
@@ -25,7 +32,20 @@ class PageResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Card::make()->schema([
+                    TextInput::make('title')
+                        ->reactive()
+                        ->afterStateUpdated(function (Closure $set, $state) {
+                            $set('slug', Str::slug($state));  //Autopopulates in slug textbox
+                        })
+                        ->autofocus()
+                        ->required(),
+                    TextInput::make('slug')
+                        ->disabled()
+                        ->required(),
+                    RichEditor::make('content'),
+                    Toggle::make('is_published')
+                ])
             ]);
     }
 
@@ -34,6 +54,7 @@ class PageResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title')->sortable(),
+                Tables\Columns\IconColumn::make('is_published')->sortable()->searchable()->boolean(),
                 Tables\Columns\TextColumn::make('slug')->sortable(),
                 Tables\Columns\TextColumn::make('created_at'),
             ])
@@ -41,21 +62,21 @@ class PageResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),         
-                Tables\Actions\DeleteAction::make(),         
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -63,5 +84,5 @@ class PageResource extends Resource
             'create' => Pages\CreatePage::route('/create'),
             'edit' => Pages\EditPage::route('/{record}/edit'),
         ];
-    }    
+    }
 }

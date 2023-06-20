@@ -15,31 +15,50 @@ class JobSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 0; $i < 10; $i++) {
             //IT Jobs
             $category = Category::find(1);
             Job::create([
-                'name' => "Computer Job" . $i,
-                'slug' => "comjob-"  . $i,
+                'name' => "Web Developer" ,
+                'slug' => "webdev"  ,
                 'is_featured' => 0,
                 'details' => "IT details",
-                'price' => rand(99, 999),
-                'job_code' => $category->category_code . "00" . $i,
+                'price' => rand(99, 999), //Service budget
+                'job_code' => $category->category_code,
                 'description' => "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
             ])->categories()->attach($category);
-        }
-        for ($i = 0; $i < 10; $i++) {
+
+            $category = Category::find(1);
+            Job::create([
+                'name' => "PHP Developer" ,
+                'slug' => "phpdev"  ,
+                'is_featured' => 0,
+                'details' => "IT details",
+                'price' => rand(99, 999), //Service budget
+                'job_code' => $category->category_code,
+                'description' => "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+            ])->categories()->attach($category);
+
             //BPO Jobs
             $category = Category::find(2);
             Job::create([
-                'name' => "BPO Job" . $i,
-                'slug' => "bpojob-"  . $i,
+                'name' => "Technical Support Representative" ,
+                'slug' => "techsupp",
                 'is_featured' => 0,
                 'details' => "BPO details",
                 'price' => rand(99, 999),
-                'job_code' => $category->category_code . "00" . $i,
+                'job_code' => $category->category_code,
                 'description' => "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
             ])->categories()->attach($category);
-        }
+
+            Job::create([
+                'name' => "Customer Service Representative" ,
+                'slug' => "cussupp",
+                'is_featured' => 0,
+                'details' => "BPO details",
+                'price' => rand(99, 999),
+                'job_code' => $category->category_code,
+                'description' => "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+            ])->categories()->attach($category);
+
     }
 }
