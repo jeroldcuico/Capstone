@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\JobListController;
+use App\Http\Controllers\Pages;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,8 +21,9 @@ Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 //JobListing Page
 Route::get('/jobs', [JobListController::class, 'index'])->name('jobs.index');
 //Job Details  Page
-//! slug = link of the job name
 Route::get('/jobs/{job:slug}', [JobListController::class, 'show'])->name('jobs.show');
+//Page Details
+Route::get('/page/{page:slug}' , [Pages::class, 'show'])->name('pages.index');
 
 Route::middleware([
     'auth:sanctum',

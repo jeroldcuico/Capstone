@@ -1,17 +1,23 @@
 <x-guest-layout>
     <x-hero-section />   
-    <section class="bg-white border-b py-8">
-        <div class="container max-w-5xl mx-auto m-8">
-            <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
-                CATEGORY JOBS
-            </h1>
-            <div class="flex flex-center gap-2">
-                    @foreach ($categoryList as $category)
-                        <x-button class="text-3xl text-gray-800 font-bold leading-none mb-3">{{ $category->name }}
-                        </x-button>
-                    @endforeach
+    <section class="bg-[#BBE1FA]">
+        <div class="mx-auto max-w-screen-xl  px-4 py-10">
+            <h1 class="text-2xl font-bold text-[#1B262C] sm:text-3xl">Categories</h1>
+            <div class="h-1 bg-blue-900 w-64 opacity-25 my-0 py-0 rounded-t mb-3"></div>
+            <div class="flex flex-wrap gap-3  md:flex-nowrap ">
+                <!-- Card 1 -->
+                @foreach ($categoryList as $category)
+                <div class="bg-gradient-to-b from-[#0F4C75] to-[#115481] text-white shadow-lg rounded">
+                    <a href="{{ route('jobs.index', 'category=' . $category->slug) }}">
+                    <img src="https://source.unsplash.com/y0_vFxOHayg" class="rounded-t" alt="" width="300"
+                        srcset="">
+                    <div class="px-5 py-2">
+                        <div class="font-bold text-xl mb-2">{{ $category->name }}</div>
+                    </div>
+                    </a>
+                </div>
+                @endforeach
             </div>
-        </div>
         </div>
     </section>
     <x-featuredjobs />
