@@ -6,7 +6,7 @@
                 <x-application-logo />
             </div>
             <nav aria-label="Page Nav" class="flex flex-row items-center gap-4 text-white sm:hidden">
-                <button type="button" id="hamburger" class="text-white focus:outline-none" id="hamburgerBtn">
+                <button type="button" id="hamburger_btn" class="text-white focus:outline-none" id="hamburgerBtn">
                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 12h16M4 18h16"></path>
